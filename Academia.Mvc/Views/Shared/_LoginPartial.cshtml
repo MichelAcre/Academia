@@ -1,0 +1,27 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Academia.ApplicationUser> SignInManager
+     <!-- Incluir o nome do seu ApplicationUser aqui, caso seja diferente -->
+@inject UserManager<Academia.ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <span class="nav-link text-white">Olá, @User.Identity!.Name!</span> <!-- Exibe o nome do usuário logado -->
+    </li>
+    <li class="nav-item">
+        <form asp-controller="Account" asp-action="Logout" method="post">
+            <button type="submit" class="btn btn-outline-light btn-sm">Sair</button> <!-- Sair do sistema-->
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="btn btn-outline-light btn-sm me-2" asp-controller="Account" asp-action="Login">Entrar</a> <!-- Metodo para entrar no sistema-->
+    </li>
+    <li class="nav-item">
+        <a class="btn btn-light btn-sm" asp-controller="Account" asp-action="Register">Cadastrar</a> <!-- Funcionalidade para cadastrar um novo usuário-->
+    </li>
+}
+</ul>
